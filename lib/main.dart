@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 main() {
-  //runApp(const MyApp());
-  runApp(const MyAppTwo());
+  runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -11,26 +11,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Text('Hello world'),
+      home: HomePage(),
     );
   }
 }
 
-class MyAppTwo extends StatelessWidget {
-  const MyAppTwo({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('My App'),
-        ),
-        body: const Center(
-          child: Text('Application Body', 
-          style: TextStyle(fontSize: 24.0),
-          ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Title')
+      ),
+      body: Container(
+        color: Colors.pink,
       ),
     );
   }
