@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      title: 'App Title',
       home: HomePage(),
     );
   }
@@ -23,10 +24,28 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Title')
+        title: const Text('Stateful/Stateless Title')
       ),
-      body: Container(
-        color: Colors.pink,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button times', 
+              style: TextStyle(
+              fontSize: 24.0,
+              )
+            ),
+            Text(
+              '1', 
+              style: Theme.of(context).textTheme.displayMedium
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: const Icon(Icons.add),
       ),
     );
   }
