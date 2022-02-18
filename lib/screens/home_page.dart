@@ -11,7 +11,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
             // put underscore if you are not using context word
             builder: (_){
-              return const Settings();
-            }   
+              return Settings("Lahiru");
+            }
           ));
+          //Navigator.of(context).pushNamed('/settings');
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

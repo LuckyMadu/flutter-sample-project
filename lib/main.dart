@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_page.dart';
-// import 'screens/settings.dart';
+import 'screens/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: const Settings()
       home: const MyHomePage(title: 'Flutter Navigation'),
+      routes: <String, WidgetBuilder>{
+        '/settings': (context) => Settings(''),
+      }
     );
   }
 }
