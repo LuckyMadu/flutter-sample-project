@@ -30,6 +30,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  var items = List<String>.generate(100, (index) => 'Item $index');
  
   @override
   Widget build(BuildContext context) {
@@ -37,26 +39,89 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 200,
-            color: Colors.white
-          ),
-          Container(
-            height: 200,
-            color: Colors.grey
-          ),
-          Container(
-            height: 200,
-            color: Colors.orange
-          ),
-          Container(
-            height: 200,
-            color: Colors.red
-          ),
-        ]
-      )
+      // body: ListView(
+      //   children: <Widget>[
+      //     Container(
+      //       height: 200,
+      //       color: Colors.white
+      //     ),
+      //     Container(
+      //       height: 200,
+      //       color: Colors.grey
+      //     ),
+      //     Container(
+      //       height: 200,
+      //       color: Colors.orange
+      //     ),
+      //     Container(
+      //       height: 200,
+      //       color: Colors.red
+      //     ),
+      //   ]
+      // )
+      // body: Container(
+      //   child: ListView(
+      //     scrollDirection:  Axis.vertical,
+      //     children: <Widget>[
+      //       ListTile(
+      //         leading: const Icon(Icons.brightness_auto),
+      //         title: const Text('Brightness Auto'),
+      //         subtitle: const Text('Change Brightness'),
+      //         trailing: const Icon(Icons.menu),
+      //         onTap: (){},
+      //       ),
+      //       const Divider(),
+      //       ListTile(
+      //         leading: const Icon(Icons.image),
+      //         title: const Text('Image'),
+      //         subtitle: const Text('Change Image'),
+      //         trailing: const Icon(Icons.menu),
+      //         onTap: (){},
+      //       ),
+      //       const Divider(),
+      //        ListTile(
+      //         leading: const Icon(Icons.image),
+      //         title: const Text('Settings'),
+      //         onTap: (){},
+      //       ),
+      //     ]
+      //   )
+    //  body: SizedBox(
+    //    height: 200,
+    //    child: ListView(
+    //     scrollDirection:  Axis.horizontal,
+    //     children: <Widget>[
+    //       Container(
+    //         width: 100.0,
+    //         height: 200,
+    //         color: Colors.grey
+    //       ),
+    //       Container(
+    //         width: 100.0,
+    //         height: 200,
+    //         color: Colors.white
+    //       ),
+    //       Container(
+    //         width: 100.0,
+    //         height: 200,
+    //         color: Colors.red
+    //       ),
+    //       Container(
+    //         width: 100.0,
+    //         height: 200,
+    //         color: Colors.orange
+    //       ),
+    //     ]
+    //       ),
+    //  )
+     body: ListView.builder(
+       itemCount: items.length,
+       itemBuilder: (context, index){
+         return ListTile(
+           title: Text(items[index]),
+         );
+       },  
+     )   
     );
   }
 }
