@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo'),
+      home: const MyHomePage(title: 'Flutter TextField'),
     );
   }
 }
@@ -30,14 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,23 +38,37 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                  cursorColor: Colors.red,
+                  maxLength: 8,
+                  onChanged: (text){
+                    // ignore: avoid_print
+                    print(text);
+                  },
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(fontSize: 24.0)),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                maxLength: 10,
+                autofocus: true,
+                obscureText: false,
+                keyboardType: TextInputType.streetAddress,
+                style: TextStyle(fontSize: 24.0),
+                enabled: true,
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
