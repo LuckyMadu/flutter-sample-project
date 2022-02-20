@@ -30,11 +30,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController title = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    title.text = "Flutter Text";
+    String name = title.text;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: TextField(
+          keyboardType: TextInputType.text,
+          controller: title,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.search, color: Colors.white),
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () {
+                title.text = '';
+              },
+            ),
+            border: InputBorder.none,
+            filled: true,
+            hintText: 'Search...',
+            hintStyle: const TextStyle(color: Colors.white70),
+          ),
+        ),
       ),
       body: Center(
         child: Column(
@@ -44,10 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TextField(
                   cursorColor: Colors.red,
                   maxLength: 8,
-                  onChanged: (text){
-                    // ignore: avoid_print
+                  onChanged: (text) {
                     print(text);
                   },
+                  onSubmitted: (text) {
+                    print('submiited');
+                  },
+                  controller: title,
                   obscureText: false,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.search),
@@ -58,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Padding(
               padding: EdgeInsets.all(20.0),
               child: TextField(
-                maxLength: 10,
+                maxLength: 14,
                 autofocus: true,
                 obscureText: false,
                 keyboardType: TextInputType.streetAddress,
