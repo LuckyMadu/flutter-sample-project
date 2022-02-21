@@ -16,8 +16,50 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const NetworkRequest(title: 'Newtork Request'),
+      home: const HomePage(title: 'Home Page'),
     );
   }
 }
 
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Click button to retrieve data',
+            ),
+            ElevatedButton(
+              child: const Text('Click Me'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    // put underscore if you are not using context word
+                    builder: (_) {
+                  return const NetworkRequest(
+                    title: 'Network Requests',
+                  );
+                }));
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

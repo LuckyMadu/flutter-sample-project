@@ -10,9 +10,24 @@ class NetworkRequest extends StatefulWidget {
 }
 
 class _NetworkRequestState extends State<NetworkRequest> {
+  //simulate network request
+  void getData() async {
+    // get user email
+    await Future.delayed(const Duration(seconds: 3), () {
+      print('lahiru@gmail.com');
+    });
+
+    Future.delayed(const Duration(seconds: 2), () {
+      print('name: lahiru, age: 20');
+    });
+
+    print("final step");
+  }
+
   @override
   void initState() {
     super.initState();
+    getData();
   }
 
   @override
@@ -24,13 +39,9 @@ class _NetworkRequestState extends State<NetworkRequest> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+          children: const <Widget>[
             Text(
-              'x',
-              style: Theme.of(context).textTheme.headline4,
+              'GETTING DATA',
             ),
           ],
         ),
