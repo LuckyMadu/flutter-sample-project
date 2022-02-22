@@ -10,24 +10,25 @@ class NetworkRequest extends StatefulWidget {
 }
 
 class _NetworkRequestState extends State<NetworkRequest> {
-  //simulate network request
-  void getData() async {
+  //generic return type
+  Future<String> getData() async {
     // get user email
-    await Future.delayed(const Duration(seconds: 3), () {
-      print('lahiru@gmail.com');
+    String email = await Future.delayed(const Duration(seconds: 3), () {
+      return 'lahiru@gmail.com';
+     // throw Exception('server down');
     });
+    return email;
+  }
 
-    Future.delayed(const Duration(seconds: 2), () {
-      print('name: lahiru, age: 20');
-    });
-
-    print("final step");
+  Future<void> getNetworkRequest() async {
+    print(await getData());
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
+    getNetworkRequest();
+    print("printed");
   }
 
   @override
