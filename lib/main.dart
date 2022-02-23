@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final StreamController _controller = StreamController();
 
+  //method1
   addStreamData() async {
     for (var i = 0; i < 10; i++) {
       await Future.delayed(const Duration(seconds: 2));
@@ -39,10 +40,26 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  //method2
+  Stream<int> addStreamData2() async*{
+    for (var i = 0; i < 10; i++) {
+      await Future.delayed(const Duration(seconds: 2));
+      yield i;
+    }
+  }
+
+  //method1 - if used controller, need to close, if not having memory leaks
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.close();
+  }
+
   @override
   void initState() {
     super.initState();
-    addStreamData();
+    //addStreamData();
+    addStreamData2();
   }
 
   @override
@@ -52,8 +69,30 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Stream'),
       ),
       body: Center(
+        // child: StreamBuilder(
+        //     stream: _controller.stream,
+        //     builder: (context, snapshot) {
+        //       if (snapshot.hasError) {
+        //         return const Text('Error');
+        //       } else if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return const CircularProgressIndicator.adaptive();
+        //       }
+        //       return Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: <Widget>[
+        //           const Text(
+        //             'Stream Data:',
+        //           ),
+        //           Text(
+        //             '${snapshot.data}',
+        //             style: Theme.of(context).textTheme.headline4,
+        //           ),
+        //         ],
+        //       );
+        //    }
+        //  ),
         child: StreamBuilder(
-            stream: _controller.stream,
+            stream: addStreamData2().where((event)=> event.isEven),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Text('Error');
@@ -72,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               );
-            }),
+           }
+         ),
       ),
     );
   }
