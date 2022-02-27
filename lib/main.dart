@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,7 +37,22 @@ class _MyHomePageState extends State<MyHomePage> {
     // late means we given a value to this variable later
     late http.Response response;
 
-    try {} catch (error) {
+    try {
+      response = await http.get(url);
+      if (response.statusCode == 200) {
+        Map peopleData = jsonDecode(response.body);
+        List<dynamic> people = peopleData['results'];
+
+        for (var item in people) {
+          var email = item['email'];
+          var name = item['name']['first'] + " " + item['name']['last'];
+          var id = item['login']['uuid'];
+          var avatar = item['picture']['large'];
+        }
+      } else {
+        return Future.error('Something went wrong, ${response.statusCode}');
+      }
+    } catch (error) {
       return Future.error(error.toString());
     }
   }
