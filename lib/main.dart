@@ -15,54 +15,74 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo'),
+      home: MainPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class MainPage extends StatelessWidget {
+  MainPage({Key? key}) : super(key: key);
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  String name = 'Lahiru';
 
   @override
   Widget build(BuildContext context) {
+    print('Building mainpage...');
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(name),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Screen2(name:name),
     );
+  }
+}
+
+class Screen2 extends StatelessWidget {
+  Screen2({Key? key, required this.name}) : super(key: key);
+
+  String name;
+
+  @override
+  Widget build(BuildContext context) {
+    print('Building screen2...');
+    return Container(
+      child: Screen3(name:name),
+    );
+  }
+}
+
+class Screen3 extends StatelessWidget {
+  Screen3({Key? key,required this.name}) : super(key: key);
+
+  String name;
+
+  @override
+  Widget build(BuildContext context) {
+    print('Building screen3...');
+    return Container(
+      child: Screen4(name:name),
+    );
+  }
+}
+
+class Screen4 extends StatelessWidget {
+   Screen4({Key? key,required this.name}) : super(key: key);
+
+ String name;
+
+  @override
+  Widget build(BuildContext context) {
+    print('Building screen4...');
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(name),
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Change Data'),
+        )
+      ],
+    ));
   }
 }
