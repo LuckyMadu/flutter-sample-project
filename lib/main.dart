@@ -20,72 +20,46 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  String name = 'Lahiru';
-
-  void changeName(String newName) {
-    setState(() {
-      name = newName;
-    });
-  }
+class MainPage extends StatelessWidget {
+  const MainPage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('Building mainpage...');
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        title: Text('Data here'),
       ),
-      body: Screen2(name: name, changeName: changeName),
+      body: Screen2()
     );
   }
 }
 
 class Screen2 extends StatelessWidget {
-  Screen2({Key? key, required this.name, required this.changeName})
-      : super(key: key);
-
-  String name;
-  Function changeName;
+  Screen2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print('Building screen2...');
     return Container(
-      child: Screen3(name: name, changeName: changeName),
+      child: Screen3(),
     );
   }
 }
 
 class Screen3 extends StatelessWidget {
-  Screen3({Key? key, required this.name, required this.changeName})
-      : super(key: key);
-
-  String name;
-  Function changeName;
+  Screen3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print('Building screen3...');
     return Container(
-      child: Screen4(name: name, changeName: changeName),
+      child: Screen4(),
     );
   }
 }
 
 class Screen4 extends StatelessWidget {
-  Screen4({Key? key, required this.name, required this.changeName})
-      : super(key: key);
-
-  String name;
-  Function changeName;
+  Screen4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +68,9 @@ class Screen4 extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(name),
+        Text('data here'),
         ElevatedButton(
-          onPressed: () {
-            changeName('Maduu');
-          },
+          onPressed: () {},
           child: const Text('Change Data'),
         )
       ],
@@ -106,34 +78,13 @@ class Screen4 extends StatelessWidget {
   }
 }
 
+class MyData extends ChangeNotifier {
+  String _name = "lahiru";
 
-// class Screen4 extends StatefulWidget {
-//   Screen4({Key? key, required this.name}) : super(key: key);
+  void changeName(String name) {
+    _name = name;
+    notifyListeners();
+  }
 
-//   String name;
-
-//   @override
-//   State<Screen4> createState() => _Screen4State();
-// }
-
-// class _Screen4State extends State<Screen4> {
-//   @override
-//   Widget build(BuildContext context) {
-//     print('Building screen4...');
-//     return Center(
-//         child: Column(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       children: [
-//         Text(widget.name),
-//         ElevatedButton(
-//           onPressed: () {
-//             setState(() {
-//               widget.name = 'Maduu';
-//             });
-//           },
-//           child: const Text('Change Data'),
-//         )
-//       ],
-//     ));
-//   }
-// }
+  String get name => _name;
+}
