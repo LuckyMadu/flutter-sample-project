@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,16 +24,23 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  const MainPage({ Key? key }) : super(key: key);
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Data here'),
-      ),
-      body: Screen2()
-    );
+    print('Building main page...');
+    return ChangeNotifierProvider(
+        create: (context) => MyData(),
+        builder: (BuildContext context, child) {
+          return Scaffold(
+            appBar: AppBar(title: Consumer<MyData>(
+              builder: (context, value, child) {
+                return Text(value.name);
+              },
+            )),
+            body: Screen2(),
+          );
+        });
   }
 }
 
@@ -68,9 +78,17 @@ class Screen4 extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('data here'),
+        // Text(Provider.of<MyData>(context, listen: true).name),
+        Consumer<MyData>(
+          builder: (context, value, child) {
+            return Text(value.name);
+          },
+        ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            //Provider.of<MyData>(context, listen: false).changeName('Maduu');
+            context.read<MyData>().changeName(Random().nextInt(100).toString());
+          },
           child: const Text('Change Data'),
         )
       ],
